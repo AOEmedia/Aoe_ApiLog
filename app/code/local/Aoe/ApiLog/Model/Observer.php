@@ -26,6 +26,11 @@ class Aoe_ApiLog_Model_Observer {
 			$logFormat = 'AOE_APILOG: No logformat configuration found in dev/aoe_apilog/logformat';
 		}
 
+        $requestUri = $controllerAction->getRequest()->getRequestUri();
+        if ((strpos($requestUri, 'wsdl=1') !== false) || (strpos($requestUri, '/wsdl/1/') !== false)) {
+            return;
+        }
+
 		$replace = array(
 			'###REQUESTURI###' => $controllerAction->getRequest()->getRequestUri(),
 			'###CLIENTIP###' => $controllerAction->getRequest()->getClientIp(),
