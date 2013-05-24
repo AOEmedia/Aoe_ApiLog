@@ -15,6 +15,7 @@ class Aoe_ApiLog_Model_Observer {
 	public function controller_action_postdispatch_api(Varien_Event_Observer $observer) {
 
 		$enable = Mage::getStoreConfig('dev/aoe_apilog/enablelogging');
+
 		if (!$enable) {
 			return;
 		}
@@ -31,11 +32,18 @@ class Aoe_ApiLog_Model_Observer {
             return;
         }
 
+        Mage::log($observer);
+
+        $request = file_get_contents('php://input');
+        $response = $controllerAction->getResponse()->getBody();
+
 		$replace = array(
 			'###REQUESTURI###' => $controllerAction->getRequest()->getRequestUri(),
 			'###CLIENTIP###' => $controllerAction->getRequest()->getClientIp(),
-			'###REQUEST###' => file_get_contents('php://input'),
-			'###RESPONSE###' => $controllerAction->getResponse()->getBody()
+			'###REQUEST###' => $request,
+			'###RESPONSE###' => $response,
+            '###REQUEST_ONELINE###' => str_replace("\n", '', str_replace("\r", '', $request)),
+            '###RESPONSE_ONELINE##' => str_replace("\n", '', str_replace("\r", '', $response)),
 		);
 
 		$message = str_replace(array_keys($replace), array_values($replace), $logFormat);
