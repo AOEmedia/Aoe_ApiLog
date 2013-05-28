@@ -32,7 +32,7 @@
 						</logfilename>
 						<logformat>
 							<label>Log format</label>
-							<comment><![CDATA[Available markers: ###REQUESTURI###, ###CLIENTIP###, ###REQUEST###, ###RESPONSE###]]></comment>
+							<comment><![CDATA[Available markers: ###REQUESTURI###, ###CLIENTIP###, ###REQUEST###, ###REQUEST_ONELINE###, ###RESPONSE###, ###RESPONSE_ONELINE###]]></comment>
 							<frontend_type>textarea</frontend_type>
 							<sort_order>40</sort_order>
 							<show_in_default>1</show_in_default>

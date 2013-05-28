@@ -32,8 +32,6 @@ class Aoe_ApiLog_Model_Observer {
             return;
         }
 
-        Mage::log($observer);
-
         $request = file_get_contents('php://input');
         $response = $controllerAction->getResponse()->getBody();
 

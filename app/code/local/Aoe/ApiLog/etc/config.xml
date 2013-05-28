@@ -42,12 +42,19 @@
 					<!--<disabled>1</disabled>-->
 					<commands>
 						<tail>
-							<label>Last n lines (newest first)</label>
+							<label>Last n lines (newest first, logins included)</label>
 							<command_string>tail -n %2$s '%1$s' | tac</command_string>
 							<model>aoe_logviewer/command_shell</model>
 							<sort_order>10</sort_order>
 							<!--<disabled>1</disabled>-->
 						</tail>
+                        <tail_login_exclude>
+							<label>Last n lines (newest first, logins excluded)</label>
+							<command_string>tail -n %2$s '%1$s' | grep -v ':loginResponse' | tac </command_string>
+							<model>aoe_logviewer/command_shell</model>
+							<sort_order>10</sort_order>
+							<!--<disabled>1</disabled>-->
+						</tail_login_exclude>
 					</commands>
 				</api.log>
 			</logs>
